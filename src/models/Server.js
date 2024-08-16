@@ -1,9 +1,8 @@
 import express from "express";
 import cors from 'cors';
 import morgan from 'morgan';
-import { PORT } from '../config/conf.js'
 import productRoutes from '../routes/productos.routes.js'
-import { dbConnection } from "../db/connection.js";
+import { Sequelize } from "../db/connection.js";
 
 
 class Server {
@@ -21,7 +20,7 @@ class Server {
     }
 
    async dbConnect(){
-        await dbConnection();
+        await db.Sequelize.sync();
    }
 
     middleware(){

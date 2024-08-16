@@ -1,14 +1,23 @@
-import myslq from 'mysql2/promise';
-import config from '../config/conf.js';
+import  Sequelize from 'sequelize';
 
 
-const connection = await myslq.createConnection({
+const db = new Sequelize(
+    DB_NAME = 'ecommerce',
+    DB_USER = 'root',
+    DB_PASSWORD = '',
+    {
+        host:'localhost',
+        dialect:'mysql'
+    }
+);
 
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.password,
-    database: config.db.database
+Sequelize
+    .authenticate()
+    .then(()=>{
+        console.log('Conexión Exitosa')
+    })
+    .catch((error)=>{
+        console.log('No hay conexión');
+    });
 
-});
-
-export default connection;
+module.exports = db;
