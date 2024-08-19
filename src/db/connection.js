@@ -2,22 +2,21 @@ import  Sequelize from 'sequelize';
 
 
 const db = new Sequelize(
-    DB_NAME = 'ecommerce',
-    DB_USER = 'root',
-    DB_PASSWORD = '',
+    'ecommerce',
+    'root',
+    '',
     {
         host:'localhost',
         dialect:'mysql'
     }
 );
 
-Sequelize
-    .authenticate()
-    .then(()=>{
-        console.log('Conexión Exitosa')
-    })
-    .catch((error)=>{
-        console.log('No hay conexión');
-    });
-
-module.exports = db;
+export async function connectToBb () {
+    try {
+        await db.authenticate();
+        console.log('Conexion Exitosa');
+    }catch(error){
+        console.log('No hay conexion', error);
+    }
+}
+export default db;

@@ -2,7 +2,9 @@ import express from "express";
 import cors from 'cors';
 import morgan from 'morgan';
 import productRoutes from '../routes/productos.routes.js'
-import { Sequelize } from "../db/connection.js";
+import { connectToBb } from '../db/connection.js';
+
+
 
 
 class Server {
@@ -10,7 +12,7 @@ class Server {
     constructor() {
  
         this.app = express();
-        this.port = PORT;
+        this.port = 4000; 
 
         this.dbConnect();
         
@@ -20,7 +22,7 @@ class Server {
     }
 
    async dbConnect(){
-        await db.Sequelize.sync();
+        await connectToBb();
    }
 
     middleware(){
@@ -31,7 +33,8 @@ class Server {
     }
 
     routes(){
-        this.app.use('/api',this.routes )
+        this.app.use('/api',productRoutes );
+        
     }
 
 
