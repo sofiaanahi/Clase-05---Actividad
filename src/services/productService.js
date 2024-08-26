@@ -1,33 +1,59 @@
+import { deleteProduct } from "../controllers/productos.controllers.js";
 import Product from "../models/Product.js"
 
 class ProductService {
 
-    constructor() {}
+    async createProduct (data) {
 
-    async findAll() {
-        return await Product.findAll();
-    }
+        try {
 
-    async getById(id) {
-        return await Product.FindByPk(id);
-    }
+            const product = await Product.create(data);
+            return product;
 
-    async create(product) {
-        return await Product.create(product);
-    }
-
-    async update(id, product){
-        await Product.update(product, {
-            where: { id }
-        })
+        } catch(error) {
+            
+            throw new Error (' error al crear el producto ')
+        }
     };
 
-    async delete(id) {
-        await Product.destroy({
-            where: {id}
-        });
-    }
-}
+    async getAllProduct() {
+        try {
+            return await Product.findAll()
+        } catch(error) {
+            throw new Error(' error al mostrar los productos ')
+        }
+    };
+    
+    async updateProduct (id, data) {
+        try {
 
+            const product = await Product.findByPk(id);
+
+            if (!product) throw new Error (' se actualizo el producto');
+            await product.update(data);
+
+            return product;
+        } catch(error){
+
+            throw new Error ('Error al actualizar el producto');
+        }
+    };
+
+    async deleteProduct(id) {
+        try {
+        
+            const product = await Product.findByPk(id);
+
+            if (!product) throw new Error('El producto fue eliminado'); 
+            await product.destroy();         
+
+            return product;
+
+        }catch(Error){
+            throw new Error( ' Error al eliminar el producto ');
+        }
+    }
+  
+};
 
 export default new ProductService()

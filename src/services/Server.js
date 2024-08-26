@@ -5,8 +5,6 @@ import productRoutes from '../routes/productos.routes.js'
 import { connectToBb } from '../db/connection.js';
 
 
-
-
 class Server {
 
     constructor() {
