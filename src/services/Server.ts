@@ -1,16 +1,23 @@
-import express from "express";
+import express, {Application} from "express";
 import cors from 'cors';
 import morgan from 'morgan';
-import productRoutes from '../routes/productos.routes.js'
-import { connectToBb } from '../db/connection.js';
-
+// import productRoutes from '../routes/productos.routes'
+// import { connectToBb } from '../db/connection';
+import { application } from 'express';
 
 class Server {
 
+
+    private app: Application;
+    private port: string;
+    private routes: 
+
+
+
     constructor() {
+
+        
  
-        this.app = express();
-        this.port = 4000; 
 
         this.dbConnect();
         
